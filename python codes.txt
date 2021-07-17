@@ -1,0 +1,565 @@
+#python code about pythogorean triplet
+import math
+
+def pythagorean_triplet(n):
+    count=0
+    for b in range(n):
+        for a in range(1, b):
+            c = int(math.sqrt( a * a + b * b))
+            if c % 1 == 0 and c<=n:
+                count+=1
+                print(count, a,b,c)
+            
+            
+pythagorean_triplet(10)
+#end
+#python code about cc june long2
+for i in range(int(input())):
+    a,b,c,d=input().split()
+    D=int(a)
+    d=int(b)
+    p=int(c)
+    q= int(d)
+    n=int(D/d)
+    count=0
+    if(n%2==0):
+        count+=int(d*(int(n/2)*(2*p+(n-1)*q)))
+    else:
+        count+=int(d*(n*(p+((n-1)/2)*q)))
+    count+=(D%d)*(p+(n)*q)
+    print(count)
+ #end
+#python code about cc mar long1
+n,h,x= input().split()
+n = int(n)
+h = int(h)
+x=int(x)
+l=list(map(int,input().split()))
+count=0
+for i in range(len(l)):
+    if(l[i]+x>=h):
+        print("YES")
+        break
+    else:
+        count=count+1
+
+if(count==len(l)):
+    print("NO")
+#end
+
+#python code about doubly linked list
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None
+
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, data):
+        if self.head is None:
+            new_node = Node(data)
+            new_node.prev = None
+            self.head = new_node
+        else:
+            new_node = Node(data)
+            cur = self.head
+            while cur.next:
+                cur = cur.next
+            cur.next = new_node
+            new_node.prev = cur
+            new_node.next = None
+
+    def prepend(self, data):
+        if self.head is None:
+            new_node = Node(data)
+            new_node.prev = None 
+            self.head = new_node
+        else:
+            new_node = Node(data)
+            self.head.prev = new_node
+            new_node.next = self.head
+            self.head = new_node
+            new_node.prev = None
+
+    def print_list(self):
+        cur = self.head
+        while cur:
+            print(cur.data)
+            cur = cur.next
+    
+    def addafter(self,key,data):
+        cur=self.head
+        while cur:
+            if cur.next is None and cur.data==key:
+                self.append(data)
+                return
+            elif cur.data==key:
+                new_node= Node(data)
+                nxt=cur.next
+                cur.next=new_node
+                new_node.next=nxt
+                new_node.prev=cur
+                nxt.prev=new_node
+            cur=cur.next
+    
+    def addbefore(self,key,data):
+        cur=self.head
+        while cur:
+            if cur.prev is None and cur.data==key:
+                self.prepend(data)
+                return
+            elif cur.data==key:
+                new_node=Node(data)
+                prev= cur.prev
+                prev.next= new_node
+                cur.prev= new_node
+                new_node.next= cur
+                new_node.prev= prev
+
+
+            cur=cur.next
+        
+    def delete(self,key):
+        cur=self.head
+        while cur:
+            if cur.data==key and cur==self.head:
+                if not cur.next:
+                    cur=None
+                    self.head=None
+                    return
+                else:
+                    nxt=cur.next
+                    cur.next= None
+                    nxt.prev=None
+
+                    cur=None
+                    self.head=nxt
+                    return
+            
+            elif cur.data==key:
+                if cur.next:
+                    nxt= cur.next
+                    prev= cur.prev
+                    prev.next=nxt
+                    nxt.prev=prev
+                    cur.next=None
+                    cur.prev=None
+                    cur=None
+                    return
+                else:
+                    prev=cur.prev
+                    prev.next=None
+                    cur.prev=None
+                    cur=None
+                    return
+            cur=cur.next
+    
+    def reverse(self):
+        tmp = None
+        cur = self.head
+        while cur:
+            tmp = cur.prev
+            cur.prev = cur.next
+            cur.next = tmp
+            cur = cur.prev
+        if tmp:
+            self.head = tmp.prev
+
+    def deletenode(self,node):
+        cur=self.head
+        while cur:
+            if cur==node and cur==self.head:
+                if not cur.next:
+                    cur=None
+                    self.head=None
+                    return
+                else:
+                    nxt=cur.next
+                    cur.next= None
+                    nxt.prev=None
+
+                    cur=None
+                    self.head=nxt
+                    return
+            
+            elif cur==node:
+                if cur.next:
+                    nxt= cur.next
+                    prev= cur.prev
+                    prev.next=nxt
+                    nxt.prev=prev
+                    cur.next=None
+                    cur.prev=None
+                    cur=None
+                    return
+                else:
+                    prev=cur.prev
+                    prev.next=None
+                    cur.prev=None
+                    cur=None
+                    return
+            cur=cur.next
+
+
+    def remduplicates(self):
+        seen={}
+        cur = self.head
+        if cur.data not in seen:
+            seen[cur.data]=1
+            cur = cur.next
+        else:
+            nxt = cur.next
+            self.deletenode(cur)
+            cur=nxt
+
+dllist = DoublyLinkedList()
+dllist.prepend(0)
+dllist.append(1)
+dllist.append(2)
+dllist.append(3)
+dllist.append(4)
+
+dllist.append(1)
+dllist.append(2)
+dllist.append(3)
+dllist.append(4)
+
+
+dllist.addafter(1,9)
+dllist.addbefore(4,10)
+dllist.delete(2)
+dllist.remduplicates()
+
+
+
+dllist.reverse()
+dllist.print_list()
+
+#end
+
+#python code about singly linked list
+class Node:
+    def __init__(self,data=None,next=None):
+        self.data=data
+        self.next=next
+class LinkedList:
+    def __init__(self,data=None):
+        self.head = Node()
+
+    def append(self,data):
+        new_node = Node(data)
+        curr= self.head
+        while curr.next!=None:
+            curr=curr.next
+        curr.next = new_node
+    
+    def length(self):
+        count=0
+        curr=self.head
+        while curr.next!=None:
+            count+=1
+            curr=curr.next
+        return count
+    
+    def display(self):
+        curr=self.head
+        while curr.next!=None:
+            curr=curr.next
+            print(curr.data, end=" ")
+    
+    def erase(self,index):
+        if index>=self.length():
+            return "Index out of range"
+        curr_idx=0
+        curr=self.head
+        while True:
+            lst=curr
+            curr= curr.next
+            if curr_idx == index:
+                lst.next= curr.next
+                return 
+            curr_idx+=1     
+
+
+    def insert(self, data, position):
+        new_node = Node(data)
+        cur_pos = 0
+        cur = self.head
+        while cur.next != None:
+            if cur_pos == position:
+                new_node.next = cur.next
+                cur.next = new_node
+                break
+            cur = cur.next
+            cur_pos += 1
+                
+
+
+                
+
+
+
+mylist= LinkedList()
+mylist.append(1)
+mylist.append(2)
+mylist.append(3)
+mylist.display()
+print("my ass")
+print()
+mylist.insert(7,1)
+mylist.display()
+
+#end
+
+#python code about my practise
+x, y=input().split()
+x= int(x)
+y= float(y)
+if(x%5==0):
+    if(y>=x+0.5):
+        print("{:.2f}".format(y-x-0.5))
+    else:
+        print(y)
+else:
+    print(y)
+#end
+
+#python code about hacker rank
+def rangoli(n):
+    import string
+    alpha = string.ascii_lowercase
+    print(alpha)
+    L = []
+    for i in range(n):
+        s = "-".join(alpha[i:n])
+        L.append((s[::-1]+s[1:]).center(4*n-3, "-"))
+    print('\n'.join(L[:0:-1]+L))
+    # your code goes here
+
+if __name__ == '__main__':
+    n = int(input())
+    print(rangoli(n))
+#end
+#python code about counters and collections
+import collections
+n=int(input())
+
+for i in range(n):
+    l1=[]
+    n,m,k= input().split()
+    n= int(n)
+    k= int(k)
+    m= int(m)
+    count=0
+    l = list(map(int,input().split()))
+    d= collections.Counter(l)
+    for key, values in d.items():
+        if values>1 and key<=n:
+            l1.append(key)
+            count+=1
+    
+    l1.insert(0,count)
+    print(l1)
+    for i in l1:
+        print(i,end=" ")
+    print()
+#end
+
+#python code about time pass
+n = int(input())
+l=[]
+l1=[]
+for i in range(n):
+    ele= int(input())
+    l.append(ele)
+if(l[0]<=l[1]):
+    l1.append(1)
+    l1.append(2)
+else:
+    l1.append(2)
+    l1.append(1)
+for i in range(2,n):
+    if(l[i]<=l[i-1]):
+        if(l1[i-1]>2):
+            l1.append(2)
+        elif(l1[i-1]==2):
+            l1.append(l1[i-1]-1)
+    else:
+        l1.append(l1[i-1]+1)
+print(sum(l1))
+#end
+
+#python code to add two numbers
+
+num1 = 15
+num2 = 12
+  
+# Adding two nos
+sum = num1 + num2
+  
+# printing values
+print("Sum of {0} and {1} is {2}" .format(num1, num2, sum))
+
+#end
+
+#python code to calculate simple interest
+def simple_interest(p,t,r):
+    print('The principal is', p)
+    print('The time period is', t)
+    print('The rate of interest is',r)
+      
+    si = (p * t * r)/100
+      
+    print('The Simple Interest is', si)
+    return si
+      
+# Driver code
+simple_interest(8, 6, 8)
+
+#end
+
+#python code to calculate compound interest
+def compound_interest(principle, rate, time):
+ 
+    # Calculates compound interest
+    Amount = principle * (pow((1 + rate / 100), time))
+    CI = Amount - principle
+    print("Compound interest is", CI)
+ 
+# Driver Code
+compound_interest(10000, 10.25, 5)
+#end
+
+#python code to replace duplicate occurences in a string
+test_str = 'Gfg is best . Gfg also has Classes now. \
+                Classes help understand better . '
+  
+# printing original string
+print("The original string is : " + str(test_str))
+  
+# initializing replace mapping 
+repl_dict = {'Gfg' :  'It', 'Classes' : 'They' }
+  
+# Replace duplicate Occurrence in String
+# Using split() + enumerate() + loop
+test_list = test_str.split(' ')
+res = set()
+for idx, ele in enumerate(test_list):
+    if ele in repl_dict:
+        if ele in res:
+            test_list[idx] = repl_dict[ele]
+        else:
+            res.add(ele)
+res = ' '.join(test_list)
+  
+# printing result 
+print("The string after replacing : " + str(res)) 
+#end
+
+#python code to perform quick sort
+def partition(arr, low, high):
+    i = (low-1)         # index of smaller element
+    pivot = arr[high]     # pivot
+  
+    for j in range(low, high):
+  
+        # If current element is smaller than or
+        # equal to pivot
+        if arr[j] <= pivot:
+  
+            # increment index of smaller element
+            i = i+1
+            arr[i], arr[j] = arr[j], arr[i]
+  
+    arr[i+1], arr[high] = arr[high], arr[i+1]
+    return (i+1)
+  
+# The main function that implements QuickSort
+# arr[] --> Array to be sorted,
+# low  --> Starting index,
+# high  --> Ending index
+  
+# Function to do Quick sort
+  
+  
+def quickSort(arr, low, high):
+    if len(arr) == 1:
+        return arr
+    if low < high:
+  
+        # pi is partitioning index, arr[p] is now
+        # at right place
+        pi = partition(arr, low, high)
+  
+        # Separately sort elements before
+        # partition and after partition
+        quickSort(arr, low, pi-1)
+        quickSort(arr, pi+1, high)
+  
+  
+# Driver code to test above
+arr = [10, 7, 8, 9, 1, 5]
+n = len(arr)
+quickSort(arr, 0, n-1)
+print("Sorted array is:")
+for i in range(n):
+    print("%d" % arr[i]),
+#end
+#python code to perform topological sorting
+from collections import defaultdict
+  
+#Class to represent a graph
+class Graph:
+    def __init__(self,vertices):
+        self.graph = defaultdict(list) #dictionary containing adjacency List
+        self.V = vertices #No. of vertices
+  
+    # function to add an edge to graph
+    def addEdge(self,u,v):
+        self.graph[u].append(v)
+  
+    # A recursive function used by topologicalSort
+    def topologicalSortUtil(self,v,visited,stack):
+  
+        # Mark the current node as visited.
+        visited[v] = True
+  
+        # Recur for all the vertices adjacent to this vertex
+        for i in self.graph[v]:
+            if visited[i] == False:
+                self.topologicalSortUtil(i,visited,stack)
+  
+        # Push current vertex to stack which stores result
+        stack.insert(0,v)
+  
+    # The function to do Topological Sort. It uses recursive 
+    # topologicalSortUtil()
+    def topologicalSort(self):
+        # Mark all the vertices as not visited
+        visited = [False]*self.V
+        stack =[]
+  
+        # Call the recursive helper function to store Topological
+        # Sort starting from all vertices one by one
+        for i in range(self.V):
+            if visited[i] == False:
+                self.topologicalSortUtil(i,visited,stack)
+  
+        # Print contents of stack
+        print stack
+  
+g= Graph(6)
+g.addEdge(5, 2);
+g.addEdge(5, 0);
+g.addEdge(4, 0);
+g.addEdge(4, 1);
+g.addEdge(2, 3);
+g.addEdge(3, 1);
+  
+print "Following is a Topological Sort of the given graph"
+g.topologicalSort()
+#end

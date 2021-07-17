@@ -1,0 +1,264 @@
+#include <stdio.h>
+int main()
+{
+   /* printf function displays the content that is
+    * passed between the double quotes.
+    */
+   printf("Hello World");
+   return 0;
+}
+
+#include 
+void hello(){
+	printf("Hello World");
+}
+int main()
+{
+   //Calling a function here
+   hello();
+   return 0;
+}
+
+int main()
+{
+   int num;
+   /* The printf() functions is used for displaying
+    * the message or output on the screen. Here we
+    * are displaying a message for the user.
+    *
+    */
+   printf("Enter an integer: ");
+
+   /* Here scanf() function reads the integer value
+    * entered by user and stores it into the variable
+    * num
+    */
+   scanf("%d", &num);
+
+   // displaying the value of num using printf
+   printf("The number entered by user is: %d", num);
+   return 0;
+}
+
+#include <stdio.h>
+int main()
+{
+    char str[100];
+    char *p;
+    int  vCount=0,cCount=0;
+
+    printf("Enter any string: ");
+    fgets(str, 100, stdin);
+
+    //assign base address of char array to pointer
+    p=str;
+
+    //'\0' signifies end of the string
+    while(*p!='\0')
+    {
+        if(*p=='A' ||*p=='E' ||*p=='I' ||*p=='O' ||*p=='U'
+        		||*p=='a' ||*p=='e' ||*p=='i' ||*p=='o' ||*p=='u')
+            vCount++;
+        else
+            cCount++;
+        //increase the pointer, to point next character
+        p++;
+    }
+
+    printf("Number of Vowels in String: %d\n",vCount);
+    printf("Number of Consonants in String: %d",cCount);
+    return 0;
+}
+#include <stdio.h>
+int main()
+{
+    char str[100];
+    char *p;
+
+    printf("Enter any string: ");
+    fgets(str, 100, stdin);
+
+    /* Assigning the base address str[0] to pointer
+     * p. p = str is same as p = str[0]
+     */
+    p=str;
+
+    printf("The input string is: ");
+    //'\0' signifies end of the string
+    while(*p!='\0')
+        printf("%c",*p++);
+
+    return 0;
+}
+
+/*C program by Chaitanya for beginnersbook.com
+ * Program to swap two numbers using pointers*/
+#include <stdio.h>
+
+// function to swap the two numbers
+void swap(int *x,int *y)
+{
+    int t;
+     t   = *x;
+    *x   = *y;
+    *y   =  t;
+}
+
+int main()
+{
+    int num1,num2;
+
+    printf("Enter value of num1: ");
+    scanf("%d",&num1);
+    printf("Enter value of num2: ");
+    scanf("%d",&num2);
+
+    //displaying numbers before swapping
+    printf("Before Swapping: num1 is: %d, num2 is: %d\n",num1,num2);
+
+    //calling the user defined function swap()
+    swap(&num1,&num2);
+
+    //displaying numbers after swapping
+    printf("After  Swapping: num1 is: %d, num2 is: %d\n",num1,num2);
+
+    return 0;
+}
+
+/* Created by Chaitanya for Beginnersbook.com
+ * C program to create, initialize and access a pointer
+ */
+
+#include <stdio.h>
+
+int main()
+{
+	//char variable
+    char ch;
+
+    //char pointer
+    char *pCh;
+
+    /* Initializing pointer variable with the
+     * address of variable ch
+     */
+    pCh = &ch;
+
+    //Assigning value to the variable ch
+    ch = 'A';
+
+    //access value and address of ch using variable ch
+    printf("Value of ch: %c\n",ch);
+    printf("Address of ch: %p\n",&ch);
+
+    //access value and address of ch using pointer variable pCh
+    printf("Value of ch: %c\n",*pCh);
+    printf("Address of ch: %p",pCh);
+
+   return 0;
+}
+
+#include <stdio.h>
+int main()
+{
+    int y;
+
+    printf("Enter year: ");
+    scanf("%d",&y);
+
+    if(y % 4 == 0)
+    {
+    	//Nested if else
+        if( y % 100 == 0)
+        {
+            if ( y % 400 == 0)
+                printf("%d is a Leap Year", y);
+            else
+                printf("%d is not a Leap Year", y);
+        }
+        else
+            printf("%d is a Leap Year", y );
+    }
+    else
+        printf("%d is not a Leap Year", y);
+
+    return 0;
+}
+/* C Program to find the length of a String without
+ *  using any standard library function 
+ */
+#include <stdio.h>
+int main()
+{
+    /* Here we are taking a char array of size 
+     * 100 which means this array can hold a string 
+     * of 100 chars. You can change this as per requirement
+     */
+    char str[100],i;
+    printf("Enter a string: \n");
+    scanf("%s",str);
+
+    // '\0' represents end of String
+    for(i=0; str[i]!='\0'; ++i);
+       printf("\nLength of input string: %d",i);
+    
+    return 0;
+}
+
+#include <stdio.h>
+int main()
+{
+   int num1, num2, sum;
+   printf("Enter first number: ");
+   scanf("%d", &num1);
+   printf("Enter second number: ");
+   scanf("%d", &num2);
+
+   sum = num1 + num2;
+   printf("Sum of the entered numbers: %d", sum);
+   return 0;
+}
+
+#include <stdio.h>
+/* User defined function sum that has two int
+ * parameters. The function adds these numbers and
+ * return the result of addition.
+ */
+int sum(int a, int b){
+   return a+b;
+}
+int main()
+{
+   int num1, num2, num3;
+   printf("Enter first number: ");
+   scanf("%d", &num1);
+   printf("Enter second number: ");
+   scanf("%d", &num2);
+
+   //Calling the function
+   num3 = sum(num1, num2);
+   printf("Sum of the entered numbers: %d", num3);
+   return 0;
+}
+
+#include <stdio.h>
+int main()
+{
+   int circle_radius;
+   float PI_VALUE=3.14, circle_area, circle_circumf;
+
+   //Ask user to enter the radius of circle
+   printf("\nEnter radius of circle: ");
+   //Storing the user input into variable circle_radius
+   scanf("%d",&circle_radius);
+
+   //Calculate and display Area
+   circle_area = PI_VALUE * circle_radius * circle_radius;
+   printf("\nArea of circle is: %f",circle_area);
+
+   //Caluclate and display Circumference
+   circle_circumf = 2 * PI_VALUE * circle_radius;
+   printf("\nCircumference of circle is: %f",circle_circumf);
+
+   return(0);
+}
